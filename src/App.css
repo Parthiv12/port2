@@ -27,10 +27,39 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* app root overlay and containers */
+#app-root {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Make main content overlay above background with a glass-like panel */
+.main-panel {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+}
+
+/* When on the home route, clear global background so only LightRays shows */
+body.home-isolated,
+html.home-isolated {
+  background: transparent !important;
+}
+
+/* Keep text readable with default colors on home */
+body.home-isolated,
+html.home-isolated,
+#root.home-isolated {
+  color: #e6eef5 !important;
+}
+
+#root.home-isolated {
+  background: transparent !important;
 }
 
 .card {
@@ -39,4 +68,11 @@
 
 .read-the-docs {
   color: #888;
+}
+
+#systems {
+  padding: 1rem 0;
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }

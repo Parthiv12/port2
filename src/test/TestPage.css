@@ -1,0 +1,36 @@
+/* Reset/override the main index.css for the test page */
+body.test-isolated {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
+  width: 100vw !important;
+  display: block !important; /* override index.css flex centering */
+  background: #000 !important; /* let LightRays show */
+  color: #fff !important;
+}
+
+/* Ensure the app root stretches for the test page */
+#root.test-isolated {
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+/* Make the canvas absolutely cover without interfering */
+.test-isolated .light-rays-container {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+}
+
+/* Overlay message styles */
+.test-message {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  color: white;
+  background: rgba(0,0,0,0.5);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
