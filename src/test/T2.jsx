@@ -13,9 +13,9 @@ const T2 = () => {
     >
       <Silk
         speed={5}
-        scale={1}
-        color="##3c3c44"
-        noiseIntensity={1}
+        scale={1.3}
+        color="#2D003A"
+        noiseIntensity={3}   
         rotation={0}
       />
     </div>
