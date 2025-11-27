@@ -16,8 +16,13 @@ import Footer from "./components/Footer";
 // Background
 import LightRays from "./backgroundM/LightRays";
 
-// Test Page
+// Test Pages
 import TestPage from "./test/TestPage";
+import T2 from "./test/T2";
+import T3 from "./test/T3/T3";
+
+
+
 
 const HomePage = () => {
   return (
@@ -70,8 +75,10 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<HomePage />} />
+         <Route path="/test" element={<TestPage />} />
+          <Route path="/t2" element={<T2 />} />
+          <Route path="/t3" element={<T3 />} />
       </Routes>
     </BrowserRouter>
   );

@@ -14,10 +14,10 @@
     "@react-three/fiber": "^9.4.0",
     "d3-force-3d": "^1.1.0",
     "framer-motion": "^12.23.24",
-    "react-router-dom": "^6.11.2",
     "ogl": "^0.0.104",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router-dom": "^6.30.2",
     "three": "^0.160.0"
   },
   "devDependencies": {
