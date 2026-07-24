@@ -6,14 +6,22 @@ import { Badge } from "../../components/ui/badge.jsx";
 import FadeIn from "../../components/ui/FadeIn.jsx";
 import { projectsCatalog } from "../../data/projects.js";
 
-const getTypeIcon = (type) => {
-  switch(type) {
-    case "Personal": return <FolderGit2 className="w-4 h-4 text-white/50" />;
-    case "Course": return <BookOpen className="w-4 h-4 text-white/50" />;
-    case "Hackathon": return <Cpu className="w-4 h-4 text-white/50" />;
-    case "Work": return <Briefcase className="w-4 h-4 text-white/50" />;
-    case "Research": return <TestTube className="w-4 h-4 text-white/50" />;
-    default: return <FolderGit2 className="w-4 h-4 text-white/50" />;
+// Same palette as ProjectGrid.jsx's getTypeStyles, kept local to match this
+// codebase's per-file convention (see tabActiveStyles in ProjectGrid.jsx).
+const getTypeStyles = (type) => {
+  switch (type) {
+    case "Personal":
+      return { icon: <FolderGit2 className="w-4 h-4 text-blue-300/80" />, text: "text-blue-300" };
+    case "Course":
+      return { icon: <BookOpen className="w-4 h-4 text-emerald-300/80" />, text: "text-emerald-300" };
+    case "Hackathon":
+      return { icon: <Cpu className="w-4 h-4 text-violet-300/80" />, text: "text-violet-300" };
+    case "Work":
+      return { icon: <Briefcase className="w-4 h-4 text-amber-300/80" />, text: "text-amber-300" };
+    case "Research":
+      return { icon: <TestTube className="w-4 h-4 text-rose-300/80" />, text: "text-rose-300" };
+    default:
+      return { icon: <FolderGit2 className="w-4 h-4 text-white/50" />, text: "text-white/40" };
   }
 }
 
@@ -47,12 +55,13 @@ export default function TimelinePage() {
             key={year}
             className="grid grid-cols-1 md:grid-cols-[120px_1fr] gap-8 md:gap-16 items-start"
           >
-            <h2 className="text-4xl font-bold text-white/20 sticky top-32 tracking-tight m-0">
+            <h2 className="text-4xl font-mono font-medium text-white/20 sticky top-32 tracking-tight m-0">
               {year}
             </h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
               {groupedByYear[year].map((item, i) => {
+                const typeStyles = getTypeStyles(item.type);
                 const cardContent = (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -67,8 +76,8 @@ export default function TimelinePage() {
                     </div>
                     
                     <div className="flex items-center gap-3 mb-5">
-                      {getTypeIcon(item.type)}
-                      <Badge variant="secondary" className="bg-transparent text-white/40 font-medium px-0 py-0 border-none uppercase tracking-widest text-[0.7rem]">
+                      {typeStyles.icon}
+                      <Badge variant="secondary" className={`bg-transparent font-medium px-0 py-0 border-none uppercase tracking-widest text-[0.7rem] ${typeStyles.text}`}>
                         {item.type}
                       </Badge>
                     </div>
@@ -80,7 +89,7 @@ export default function TimelinePage() {
                       {item.description}
                     </p>
                     
-                    <div className="mt-auto flex flex-wrap gap-2 text-[0.8rem] font-medium text-white/30 tracking-wide">
+                    <div className="mt-auto flex flex-wrap gap-2 text-[0.75rem] font-mono text-white/30 tracking-wide">
                       {item.tags.slice(0, 4).map((tag, idx) => (
                         <span key={tag}>
                           {tag}{idx < Math.min(item.tags.length, 4) - 1 ? "  ·  " : ""}

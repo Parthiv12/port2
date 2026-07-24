@@ -10,56 +10,30 @@ import FadeIn from "../../components/ui/FadeIn.jsx";
 
 const getTypeStyles = (type) => {
   switch(type) {
-    case "Personal": 
-      return { 
-        icon: <FolderGit2 className="w-3.5 h-3.5" />, 
-        badge: "text-blue-300 bg-blue-500/10 border-blue-500/20",
-        border: "border-neutral-800 hover:border-blue-500/50",
-        shadow: "hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]",
-        bg: "hover:bg-blue-950/20"
-      };
-    case "Course": 
-      return { 
-        icon: <BookOpen className="w-3.5 h-3.5" />, 
-        badge: "text-emerald-300 bg-emerald-500/10 border-emerald-500/20",
-        border: "border-neutral-800 hover:border-emerald-500/50",
-        shadow: "hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]",
-        bg: "hover:bg-emerald-950/20"
-      };
-    case "Hackathon": 
-      return { 
-        icon: <Cpu className="w-3.5 h-3.5" />, 
-        badge: "text-violet-300 bg-violet-500/10 border-violet-500/20",
-        border: "border-neutral-800 hover:border-violet-500/50",
-        shadow: "hover:shadow-[0_0_40px_rgba(139,92,246,0.15)]",
-        bg: "hover:bg-violet-950/20"
-      };
-    case "Work": 
-      return { 
-        icon: <Briefcase className="w-3.5 h-3.5" />, 
-        badge: "text-amber-300 bg-amber-500/10 border-amber-500/20",
-        border: "border-neutral-800 hover:border-amber-500/50",
-        shadow: "hover:shadow-[0_0_40px_rgba(245,158,11,0.15)]",
-        bg: "hover:bg-amber-950/20"
-      };
-    case "Research": 
-      return { 
-        icon: <TestTube className="w-3.5 h-3.5" />, 
-        badge: "text-rose-300 bg-rose-500/10 border-rose-500/20",
-        border: "border-neutral-800 hover:border-rose-500/50",
-        shadow: "hover:shadow-[0_0_40px_rgba(244,63,94,0.15)]",
-        bg: "hover:bg-rose-950/20"
-      };
-    default: 
-      return { 
-        icon: <FolderGit2 className="w-3.5 h-3.5" />, 
-        badge: "text-neutral-300 bg-white/10 border-white/10",
-        border: "border-neutral-800 hover:border-neutral-600",
-        shadow: "hover:shadow-[0_0_40px_rgba(255,255,255,0.1)]",
-        bg: "hover:bg-white/5"
-      };
+    case "Personal":
+      return { icon: <FolderGit2 className="w-3.5 h-3.5" />, badge: "text-blue-300 bg-blue-500/10 border-blue-500/20" };
+    case "Course":
+      return { icon: <BookOpen className="w-3.5 h-3.5" />, badge: "text-emerald-300 bg-emerald-500/10 border-emerald-500/20" };
+    case "Hackathon":
+      return { icon: <Cpu className="w-3.5 h-3.5" />, badge: "text-violet-300 bg-violet-500/10 border-violet-500/20" };
+    case "Work":
+      return { icon: <Briefcase className="w-3.5 h-3.5" />, badge: "text-amber-300 bg-amber-500/10 border-amber-500/20" };
+    case "Research":
+      return { icon: <TestTube className="w-3.5 h-3.5" />, badge: "text-rose-300 bg-rose-500/10 border-rose-500/20" };
+    default:
+      return { icon: <FolderGit2 className="w-3.5 h-3.5" />, badge: "text-neutral-300 bg-white/10 border-white/10" };
   }
 }
+
+// Filter pills use the same per-type palette as the card badges
+const tabActiveStyles = {
+  All: "data-active:bg-white/10 data-active:text-white data-active:border-white/20",
+  Personal: "data-active:bg-blue-500/15 data-active:text-blue-300 data-active:border-blue-500/30",
+  Course: "data-active:bg-emerald-500/15 data-active:text-emerald-300 data-active:border-emerald-500/30",
+  Hackathon: "data-active:bg-violet-500/15 data-active:text-violet-300 data-active:border-violet-500/30",
+  Work: "data-active:bg-amber-500/15 data-active:text-amber-300 data-active:border-amber-500/30",
+  Research: "data-active:bg-rose-500/15 data-active:text-rose-300 data-active:border-rose-500/30",
+};
 
 const getGridItemClass = (index) => {
   switch (index) {
@@ -85,22 +59,27 @@ export default function ProjectGrid() {
   return (
     <div className="min-h-screen font-sans w-full max-w-7xl mx-auto" style={{ padding: "140px clamp(16px, 5vw, 64px) 100px" }}>
       <FadeIn>
-        <div className="flex flex-col gap-4 mb-16">
-          <h1 className="text-5xl font-bold tracking-tight text-white m-0">
-            Selected Work
-          </h1>
-          <p className="text-xl text-white/60 font-light max-w-2xl mb-4">
-            Personal projects, coursework, and hackathon builds.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+          <div>
+            <h1 className="text-5xl font-bold tracking-tight text-white m-0 mb-3">
+              Selected Work
+            </h1>
+            <p className="text-xl text-white/60 font-light max-w-2xl m-0">
+              Personal projects, coursework, and hackathon builds.
+            </p>
+          </div>
 
-          <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="w-full mt-4">
-            <TabsList className="bg-neutral-900 border border-neutral-800 flex flex-wrap h-auto w-fit">
-              <TabsTrigger value="All" className="data-[state=active]:bg-neutral-800 data-[state=active]:text-white">All</TabsTrigger>
-              <TabsTrigger value="Personal" className="data-[state=active]:bg-neutral-800 data-[state=active]:text-white">Personal</TabsTrigger>
-              <TabsTrigger value="Course" className="data-[state=active]:bg-neutral-800 data-[state=active]:text-white">Course</TabsTrigger>
-              <TabsTrigger value="Hackathon" className="data-[state=active]:bg-neutral-800 data-[state=active]:text-white">Hackathon</TabsTrigger>
-              <TabsTrigger value="Work" className="data-[state=active]:bg-neutral-800 data-[state=active]:text-white">Work</TabsTrigger>
-              <TabsTrigger value="Research" className="data-[state=active]:bg-neutral-800 data-[state=active]:text-white">Research</TabsTrigger>
+          <Tabs defaultValue="All" value={activeTab} onValueChange={setActiveTab} className="shrink-0">
+            <TabsList className="bg-neutral-900/80 border border-neutral-800 flex flex-wrap h-auto w-fit">
+              {["All", "Personal", "Course", "Hackathon", "Work", "Research"].map((tab) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className={`px-3 py-1 text-white/55 hover:text-white ${tabActiveStyles[tab]}`}
+                >
+                  {tab}
+                </TabsTrigger>
+              ))}
             </TabsList>
           </Tabs>
         </div>
@@ -129,13 +108,23 @@ export default function ProjectGrid() {
                   <motion.div
                     whileHover={{ y: -4 }}
                     transition={{ duration: 0.2, ease: "easeOut" }}
-                    className={`relative h-full flex flex-col bg-neutral-900/40 border transition-all duration-300 rounded-[2rem] overflow-hidden cursor-pointer ${styles.border} ${styles.shadow} ${styles.bg}`}
+                    className="relative h-full flex flex-col bg-neutral-900/40 border border-neutral-800 hover:border-neutral-600 hover:bg-white/[0.02] transition-all duration-300 rounded-[2rem] overflow-hidden cursor-pointer"
                   >
-                    <div className="absolute top-6 right-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    <div className="absolute top-6 right-6 z-10 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                       <div className="bg-white text-black p-2 rounded-full shadow-sm">
                         <ArrowUpRight className="w-4 h-4" />
                       </div>
                     </div>
+
+                    {p.media?.[0]?.type === "image" && (
+                      <img
+                        src={p.media[0].src}
+                        alt={p.media[0].caption || p.title}
+                        loading="lazy"
+                        className={`w-full object-cover border-b border-neutral-800/60 ${isLarge ? 'h-56' : 'h-36'}`}
+                        onError={(e) => { e.currentTarget.style.display = "none"; }}
+                      />
+                    )}
 
                     <div className={`p-8 lg:p-10 flex flex-col flex-1 ${isLarge ? 'justify-end' : ''}`}>
                       <div className="flex items-center justify-between mb-8">
@@ -143,7 +132,7 @@ export default function ProjectGrid() {
                           {styles.icon}
                           {p.type}
                         </Badge>
-                        <span className="text-white/30 text-[0.85rem] font-medium tracking-wider">{p.year}</span>
+                        <span className="text-white/30 text-[0.8rem] font-mono tracking-wider">{p.year}</span>
                       </div>
 
                       <h3 className={`${isLarge ? 'text-4xl' : 'text-2xl'} font-bold text-white mb-4 tracking-tight leading-tight transition-colors duration-300`}>
@@ -156,12 +145,12 @@ export default function ProjectGrid() {
 
                       <div className="flex flex-wrap gap-2 mt-auto">
                         {p.tags.slice(0, isLarge ? 5 : 3).map(tag => (
-                          <Badge key={tag} variant="outline" className="bg-neutral-800/30 text-neutral-400/80 border-neutral-800 font-medium px-2.5 py-0.5 shadow-none">
+                          <Badge key={tag} variant="outline" className="bg-neutral-800/30 text-neutral-400/80 border-neutral-800 font-mono text-[0.7rem] tracking-wide px-2.5 py-0.5 shadow-none">
                             {tag}
                           </Badge>
                         ))}
                         {p.tags.length > (isLarge ? 5 : 3) && (
-                          <Badge variant="outline" className="bg-transparent text-neutral-500/50 border-neutral-800/50 shadow-none px-2">
+                          <Badge variant="outline" className="bg-transparent text-neutral-500/50 border-neutral-800/50 font-mono text-[0.7rem] shadow-none px-2">
                             +{p.tags.length - (isLarge ? 5 : 3)}
                           </Badge>
                         )}

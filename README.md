@@ -1,16 +1,38 @@
-# React + Vite
+# parthivg.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio. Vite + React 19 SPA, Tailwind v4, react-router 6, deployed on Vercel.
 
-Currently, two official plugins are available:
+```bash
+npm run dev       # local dev server
+npm run build     # production build
+npm run preview   # serve the production build locally
+npm run analyze   # build + open bundle treemap
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Where things live
 
-## React Compiler
+- **Project data** — `src/data/projects.js`. One entry per project; the Projects grid, Timeline, Home, and detail pages all read from it.
+- **Blog posts** — `src/content/blog/YYYY-MM-DD-slug.md`. Drop a markdown file in, it appears at `/blog/slug`. Frontmatter:
+  ```markdown
+  ---
+  title: Post title
+  date: 2026-07-19
+  summary: One or two sentences for the index page.
+  tags: comma, separated
+  ---
+  ```
+- **Project images/videos** — put files in `public/projects/<slug>/`, then add to that project's `media` array:
+  ```js
+  media: [
+    { type: "image", src: "/projects/tracelens/1.png", caption: "Trace graph view" },
+    { type: "video", src: "/projects/harmonaize/demo.mp4", caption: "Demo at GrizzHacks" },
+  ],
+  ```
+  Detail pages and grid thumbnails pick them up automatically; everything renders fine with `media: []`.
+- **Profile photo** — `src/assets/data/p2.jpg`, imported in `src/pages/About/AboutPage.jsx`. To swap: replace the file or change that one import.
+- **Resume** — `public/resume.pdf`. Replace the file, no code change needed.
+- **Sitemap** — `public/sitemap.xml`. Add a line when adding a project or blog post.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Before shipping copy changes
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Search the repo for `TODO:` — those are spots that need a real number or a decision.

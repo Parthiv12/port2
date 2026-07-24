@@ -1,96 +1,76 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaFileAlt, FaCode } from "react-icons/fa";
-
-// Sections
-import ProjectsSection from "../../components/sections/ProjectsSection.jsx";
-import ExperienceSection from "../../components/sections/ExperienceSection.jsx";
-import SkillsSection from "../../components/sections/SkillsSection.jsx";
-
 import "./HomePage.css";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { ease: [0.16, 1, 0.3, 1], duration: 0.9 } },
+};
+
 export default function HomePage() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { ease: [0.16, 1, 0.3, 1], duration: 1 } 
-    }
-  };
-
   return (
-    <div className="home-page-wrapper" style={{ fontFamily: "system-ui, sans-serif", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", paddingInline: "20px" }}>
-        {/* Content Layer */}
-        <motion.div 
-          style={{ maxWidth: "800px", margin: "0 auto", position: "relative", zIndex: 1 }}
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
+    <div className="home-page-wrapper font-sans flex flex-col">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="flex-1 flex flex-col justify-center items-center text-center px-5"
+        style={{ minHeight: "100vh" }}
+      >
+        <motion.h1
+          variants={itemVariants}
+          className="text-white font-bold m-0 mb-4"
+          style={{ fontSize: "clamp(2.8rem, 6vw, 4rem)", letterSpacing: "-0.03em", lineHeight: 1.05 }}
         >
-          <motion.h1 variants={itemVariants} style={{ fontSize: "clamp(2.8rem, 6vw, 4rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "white", marginBottom: "16px" }}>
-            Parthiv Gajula
-          </motion.h1>
-          
-          <motion.p variants={itemVariants} style={{ fontSize: "clamp(1.2rem, 3vw, 1.4rem)", fontWeight: 500, color: "rgba(255,255,255,0.7)", marginBottom: "40px" }}>
-            Concentrating in building LLMs from scratch.
-          </motion.p>
-          
-          <motion.div variants={itemVariants} style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>
-            <a href="https://github.com/Parthiv12" target="_blank" rel="noopener noreferrer" style={btnOutlineStyle}>
-              <FaGithub size={16} /> GitHub
-            </a>
-            <a href="https://devpost.com/Parthiv12" target="_blank" rel="noopener noreferrer" style={btnOutlineStyle}>
-              <FaCode size={16} /> Devpost
-            </a>
-            <a href="https://www.linkedin.com/in/parthiv-gajula-b84a12182/" target="_blank" rel="noopener noreferrer" style={btnOutlineStyle}>
-              <FaLinkedin size={16} /> LinkedIn
-            </a>
-            <a href="/PGResumeApril.pdf" target="_blank" rel="noopener noreferrer" style={btnPrimaryStyle}>
-              <FaFileAlt size={16} /> Resume
-            </a>
-            <a href="/rag" style={btnOutlineStyle}>
-              <FaFileAlt size={16} /> RAG Demo
-            </a>
-          </motion.div>
+          Parthiv Gajula
+        </motion.h1>
+
+        <motion.p
+          variants={itemVariants}
+          className="text-white font-bold m-0 mb-5"
+          style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "clamp(1.4rem, 3vw, 1.9rem)", letterSpacing: "-0.01em" }}
+        >
+          Building LLMs from scratch.
+        </motion.p>
+
+        <motion.p variants={itemVariants} className="text-white/40 text-[0.8rem] font-mono m-0 mb-10 tracking-wide">
+          CS senior, Wayne State · May 2026
+        </motion.p>
+
+        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3 mb-12">
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="hero-btn hero-btn-primary">
+            <FaFileAlt size={15} /> Resume
+          </a>
+          <a href="https://github.com/Parthiv12" target="_blank" rel="noopener noreferrer" className="hero-btn hero-btn-outline">
+            <FaGithub size={15} /> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/parthiv-gajula-b84a12182/" target="_blank" rel="noopener noreferrer" className="hero-btn hero-btn-outline">
+            <FaLinkedin size={15} /> LinkedIn
+          </a>
+          <a href="https://devpost.com/Parthiv12" target="_blank" rel="noopener noreferrer" className="hero-btn hero-btn-outline">
+            <FaCode size={15} /> Devpost
+          </a>
         </motion.div>
-      </div>
+
+        <motion.p variants={itemVariants} className="text-white/40 text-[0.95rem] m-0">
+          <a href="https://tracelens.parthivg.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white underline underline-offset-4 decoration-white/20 transition-colors">
+            TraceLens is live
+          </a>
+          <span className="mx-3 text-white/20">·</span>
+          <Link to="/blog" className="text-white/60 hover:text-white underline underline-offset-4 decoration-white/20 transition-colors">
+            I write about what breaks
+          </Link>
+        </motion.p>
+      </motion.div>
     </div>
   );
 }
-
-
-
-const btnOutlineStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-  padding: "10px 20px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255,255,255,0.15)",
-  color: "white",
-  textDecoration: "none",
-  background: "transparent",
-  fontSize: "0.95rem",
-  fontWeight: 500,
-  transition: "background 0.2s"
-};
-
-const btnPrimaryStyle = {
-  ...btnOutlineStyle,
-  background: "white",
-  color: "black",
-  borderColor: "white",
-};
