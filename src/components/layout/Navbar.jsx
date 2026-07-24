@@ -11,6 +11,8 @@ export default function Navbar() {
   const links = [
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects" },
+    { name: "Blog", href: "/blog" },
+    { name: "Research", href: "/research" },
     { name: "Timeline", href: "/timeline" },
     { name: "Stack", href: "/stack" },
     { name: "About", href: "/about" }

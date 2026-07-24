@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { GitHubCalendar } from 'react-github-calendar';
 import PortraitCard from "../../components/ui/PortraitCard.jsx";
 import { Mail, Code2 } from "lucide-react";
@@ -50,20 +51,24 @@ export default function AboutPage() {
           </motion.h1>
 
           <motion.p variants={itemVariants} className="text-[1.15rem] leading-relaxed text-white/90 font-medium max-w-2xl">
-            I’m Parthiv — I like understanding how things work, then pushing them until they work better.
+            I'm Parthiv — a CS senior at Wayne State University, graduating May 2026.
           </motion.p>
-          
+
           <motion.p variants={itemVariants} className="text-[1.05rem] leading-relaxed text-white/60 font-light max-w-2xl">
-            I tend to get pulled toward problems that feel a little messy at first. Right now, I'm specializing in training and fine-tuning Large Language Models from scratch, digging into the infrastructure and systemic complexity required to make them work.
+            I build backend and systems things — a tracing platform that's live right now, an encrypted FUSE filesystem, RAG research. Two summers interning at 365 Retail Markets; the second one, I made their slow SQL up to 45% faster.
           </motion.p>
-          
+
           <motion.p variants={itemVariants} className="text-[1.05rem] leading-relaxed text-white/60 font-light max-w-2xl">
-            A lot of what I build sits somewhere between hardcore engineering and curiosity. I enjoy sitting in that space, breaking things, and slowly shaping them into something clean, usable, and reliable.
+            Currently going deep on training LLMs from scratch. When something breaks in an interesting way, it ends up on{" "}
+            <Link to="/blog" className="text-white/85 underline underline-offset-4 decoration-white/25 hover:decoration-white transition-colors">
+              the blog
+            </Link>
+            .
           </motion.p>
 
           {/* Contact Links */}
           <motion.div variants={itemVariants} className="mt-4 flex flex-wrap gap-4">
-            <a href="mailto:pgajula@oakland.edu" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors">
+            <a href="mailto:parthivg@wayne.edu" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors">
               <Mail className="w-4 h-4" /> Email Me
             </a>
             <a href="https://github.com/Parthiv12" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-white font-medium text-sm hover:bg-neutral-800 transition-colors">
@@ -84,7 +89,7 @@ export default function AboutPage() {
                    Ongoing Work
                  </h2>
                  <p className="text-white/40 text-[0.85rem] font-light italic">
-                   Building consistently, scaling LLMs from scratch.
+                   GitHub activity, live from the source.
                  </p>
              </div>
              

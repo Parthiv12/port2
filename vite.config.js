@@ -13,18 +13,18 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    visualizer({
-      open: true,
-      gzipSize: true,
-      brotliSize: true,
-      filename: "bundle-analysis.html",
-      template: "treemap"
-    })
+    ...(process.env.ANALYZE
+      ? [
+          visualizer({
+            open: true,
+            gzipSize: true,
+            brotliSize: true,
+            filename: "bundle-analysis.html",
+            template: "treemap",
+          }),
+        ]
+      : []),
   ],
-
-  server: {
-    allowedHosts: ["parotidean-unfiscally-charlott.ngrok-free.dev"],
-  },
 
   resolve: {
     alias: {
@@ -37,19 +37,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes("node_modules/three/examples")) {
-            return "vendor-three-extras"
-          }
-          if (id.includes("node_modules/three")) {
-            return "vendor-three"
-          }
-          if (id.includes("node_modules/@react-three")) {
-            return "vendor-r3f"
-          }
           if (id.includes("node_modules/framer-motion")) {
             return "vendor-motion"
           }
-
         },
       },
     },
